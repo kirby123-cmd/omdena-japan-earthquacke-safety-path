@@ -1,0 +1,1 @@
+# omdena-japan-earthquacke-safety-path
