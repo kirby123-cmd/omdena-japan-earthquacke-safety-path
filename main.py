@@ -3,6 +3,8 @@ import folium
 import geopandas as gpd
 import geopy
 import networkx as nx
+import joblib
+
 import osmnx as ox
 import shapely.wkt
 import pandas as pd
@@ -50,10 +52,14 @@ if add_selectbox == 'About':
             , unsafe_allow_html=True)
 
 elif add_selectbox == 'Find Path':
-    st.subheader('Find Path')
+    st.subheader('Find Safest Path')
 
-    G_walk = ox.graph_from_place('Manhattan Island, New York City, New York, USA',
-                             network_type='walk')
+    sentence = st.text_input('Input your current location:') 
+
+    # G_walk = ox.graph_from_place('Manhattan Island, New York City, New York, USA',
+    #                          network_type='walk')
+
+    G_walk = joblib.load('G_walk.sav')
 
     orig_node = ox.get_nearest_node(G_walk,
                                     (40.748441, -73.985664))
